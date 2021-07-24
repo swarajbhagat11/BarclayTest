@@ -10,14 +10,7 @@ namespace FileData
             // UnhandledExceptionTrapper method to handle exception globally 
             AppDomain.CurrentDomain.UnhandledException += ExceptionHandling.UnhandledExceptionTrapper;
 
-            if (args.Length < 2)
-            {
-                Console.WriteLine("Please pass arguments.");
-            }
-            else
-            {
-                new FileInformation().showFileInfo(args[0], args[1]);
-            }
+            Console.WriteLine(new FileInformation().showFileInfo(args));
         }
     }
 }

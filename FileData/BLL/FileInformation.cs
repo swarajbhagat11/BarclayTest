@@ -5,21 +5,28 @@ namespace FileData.BLL
 {
     public class FileInformation
     {
-        public void showFileInfo(string queryType, string filePath)
+        public dynamic showFileInfo(string[] args)
         {
             string[] versionChecks = new string[] { "-v", "--v", "/v", "--version" };
             string[] sizeChecks = new string[] { "-s", "--s", "/s", "--size" };
 
+            if (args.Length < 2)
+            {
+                return "Please pass appropriate arguments.";
+            }
+
             // here based on 1st args, appropriate object will get created (injecting object) 
             // we can do it this using interface with DI container
-            if (versionChecks.Contains(queryType))
+            if (versionChecks.Contains(args[0]))
             {
-                Console.WriteLine(new FileVersion().getVersion(filePath));
+                return new FileVersion().getVersion(args[1]);
             }
-            else if (sizeChecks.Contains(queryType))
+            else if (sizeChecks.Contains(args[0]))
             {
-                Console.WriteLine(new FileSize().getSize(filePath));
+                return new FileSize().getSize(args[1]);
             }
+
+            return "Arguments are not proper.";
         }
     }
 }
